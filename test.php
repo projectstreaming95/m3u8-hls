@@ -104,5 +104,9 @@ while(true):
 
     dump($HLSFiles);
 
+    exec("git add .");
+    exec("git commit -m 'Update HLS Files Automatically'");
+    exec("git push origin main --force");
+
     sleep(1);
 endwhile;
