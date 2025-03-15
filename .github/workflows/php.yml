@@ -2,9 +2,9 @@ name: PHP Composer
 
 on:
   workflow_dispatch:
-  
+
 permissions:
-  contents: write-all
+  contents: write
 
 jobs:
   build:
