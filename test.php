@@ -52,9 +52,10 @@ function fetchM3U8($channel){
     $try = 0;
     while(true && $try < $maxTries){
         $try++;
-        $m3u8Link = "http://mhiptv.info:2095/live/giro069/22437689060/$channel.m3u8";
+        $m3u8Link = "http://mhiptv.info:2095/live/giro069/2243768906/$channel.m3u8";
 
         $guzzleClient = new Client([
+            'verify' => false,
             'headers' => [
                 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
             ],
@@ -73,9 +74,15 @@ function fetchM3U8($channel){
             );
         
             $m3u8Content = $m3u8Request->getBody()->getContents();
+        }catch(GuzzleHttp\Exception\ClientException $e){
+            $response = $e->getResponse();
+            $responseBodyAsString = $response->getBody()->getContents();
+            
+            dump($responseBodyAsString, $response->getHeaders());
+            sleep(1);
+
         }catch(Exception $e){
             dump($e->getMessage());
-            dump(file_get_contents($m3u8Link));
             sleep(1);
             continue;
         }
