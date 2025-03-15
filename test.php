@@ -71,6 +71,7 @@ function fetchM3U8($channel){
             $m3u8Content = $m3u8Request->getBody()->getContents();
         }catch(Exception $e){
             dump($e->getMessage());
+            dump(file_get_contents($m3u8Link));
             sleep(1);
             continue;
         }
