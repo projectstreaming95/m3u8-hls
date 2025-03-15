@@ -54,7 +54,11 @@ function fetchM3U8($channel){
         $try++;
         $m3u8Link = "http://mhiptv.info:2095/live/giro069/2243768906/$channel.m3u8";
 
-        $guzzleClient = new Client();
+        $guzzleClient = new Client([
+            'headers' => [
+                'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+            ],
+        ]);
     
         $hlsURL = "";
         
