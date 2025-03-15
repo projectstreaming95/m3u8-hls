@@ -101,6 +101,7 @@ while(true):
     }
 
     if(md5($m3u8Content) === md5_file(__DIR__ . "/22.m3u8")){
+        dump("No Changes");
         sleep(1);
         continue;
     }
