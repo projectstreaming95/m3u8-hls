@@ -47,12 +47,12 @@ function createFilesFolder() {
 
 createFilesFolder();
 
-while(true):
+function fetchHLSFiles($channel = 22) {
     deleteOldFiles(__DIR__ . "/hls");
 
     RemoveEmptySubFolders(__DIR__ . "/hls");
     
-    $m3u8Link = "http://mhiptv.info:2095/live/giro069/2243768906/22.m3u8";
+    $m3u8Link = "http://mhiptv.info:2095/live/giro069/2243768906/$channel.m3u8";
 
     $guzzleClient = new Client();
 
@@ -103,7 +103,7 @@ while(true):
     if(md5($m3u8Content) === md5_file(__DIR__ . "/22.m3u8")){
         dump("No Changes");
         sleep(1);
-        continue;
+        return;
     }
 
     file_put_contents(__DIR__ . "/22.m3u8", $m3u8Content);
@@ -115,4 +115,27 @@ while(true):
     exec("git push origin main --force");
 
     sleep(1);
+}
+
+while(true):
+    try{
+        fetchHLSFiles(22);
+    }catch(Exception $e){
+        dump($e->getMessage());
+    }
+
+    $m3u8Request = $guzzleClient->get(
+        "https://google.com",
+        [
+            'on_stats' => function (TransferStats $stats) use (&$hlsURL) {
+                $hlsURL = $stats->getEffectiveUri();
+            },
+        ]
+    );
+
+    $m3u8Content = $m3u8Request->getBody()->getContents();
+
+    dump("hereee", $m3u8Content);
+
+    break;
 endwhile;
