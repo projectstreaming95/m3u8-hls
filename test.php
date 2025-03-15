@@ -100,6 +100,11 @@ while(true):
         );
     }
 
+    if(md5($m3u8Content) === md5_file(__DIR__ . "/22.m3u8")){
+        sleep(1);
+        continue;
+    }
+
     file_put_contents(__DIR__ . "/22.m3u8", $m3u8Content);
 
     dump($HLSFiles);
