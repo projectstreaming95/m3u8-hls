@@ -52,7 +52,7 @@ function fetchM3U8($channel){
     $try = 0;
     while(true && $try < $maxTries){
         $try++;
-        $m3u8Link = "http://mhiptv.info:2095/live/giro069/2243768906/$channel.m3u8";
+        $m3u8Link = "http://mhiptv.info:2095/live/giro069/22437689060/$channel.m3u8";
 
         $guzzleClient = new Client([
             'headers' => [
