@@ -27,8 +27,8 @@ jobs:
           ${{ runner.os }}-php-
 
     - name: Install dependencies
-      run: composer install
-      
+      run: composer install --prefer-dist --no-progress
+
     - name: Start updating HLS files
       run: php test.php
 

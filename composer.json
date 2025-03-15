@@ -15,5 +15,6 @@
     "require": {
         "guzzlehttp/guzzle": "^7.9",
         "symfony/var-dumper": "^7.2"
-    }
+    },
+    "license": "MIT"
 }
