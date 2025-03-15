@@ -47,27 +47,51 @@ function createFilesFolder() {
 
 createFilesFolder();
 
+function fetchM3U8($channel){
+    $maxTries = 10;
+    $try = 0;
+    while(true && $try < $maxTries){
+        $try++;
+        $m3u8Link = "http://mhiptv.info:2095/live/giro069/2243768906/$channel.m3u8";
+
+        $guzzleClient = new Client();
+    
+        $hlsURL = "";
+        
+        try{
+            $m3u8Request = $guzzleClient->get(
+                $m3u8Link,
+                [
+                    'on_stats' => function (TransferStats $stats) use (&$hlsURL) {
+                        $hlsURL = $stats->getEffectiveUri();
+                    },
+                ]
+            );
+        
+            $m3u8Content = $m3u8Request->getBody()->getContents();
+        }catch(Exception $e){
+            dump($e->getMessage());
+            sleep(1);
+            continue;
+        }
+
+    
+        return compact("m3u8Content", "hlsURL");
+    }
+
+}
+
 function fetchHLSFiles($channel = 22) {
     deleteOldFiles(__DIR__ . "/hls");
 
     RemoveEmptySubFolders(__DIR__ . "/hls");
     
-    $m3u8Link = "http://mhiptv.info:2095/live/giro069/2243768906/$channel.m3u8";
-
     $guzzleClient = new Client();
 
-    $hlsURL = "";
+    $fetchedM3U8 = fetchM3U8($channel);
 
-    $m3u8Request = $guzzleClient->get(
-        $m3u8Link,
-        [
-            'on_stats' => function (TransferStats $stats) use (&$hlsURL) {
-                $hlsURL = $stats->getEffectiveUri();
-            },
-        ]
-    );
-
-    $m3u8Content = $m3u8Request->getBody()->getContents();
+    $hlsURL = $fetchedM3U8["hlsURL"];
+    $m3u8Content = $fetchedM3U8["m3u8Content"];
 
     $splitedM3u8Content = explode("\n", $m3u8Content);
     $finalHLSURL = explode("/live", $hlsURL)[0];
@@ -100,13 +124,13 @@ function fetchHLSFiles($channel = 22) {
         );
     }
 
-    if(md5($m3u8Content) === md5_file(__DIR__ . "/22.m3u8")){
+    if(md5($m3u8Content) === md5_file(__DIR__ . "/$channel.m3u8")){
         dump("No Changes");
         sleep(1);
         return;
     }
 
-    file_put_contents(__DIR__ . "/22.m3u8", $m3u8Content);
+    file_put_contents(__DIR__ . "/$channel.m3u8", $m3u8Content);
 
     dump($HLSFiles);
 
