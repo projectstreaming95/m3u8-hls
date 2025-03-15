@@ -124,6 +124,8 @@ while(true):
         dump($e->getMessage());
     }
 
+    $guzzleClient = new Client();
+
     $m3u8Request = $guzzleClient->get(
         "https://google.com",
         [
