@@ -52,7 +52,7 @@ function fetchM3U8($channel){
     $try = 0;
     while(true && $try < $maxTries){
         $try++;
-        $m3u8Link = "http://212.237.231.90:80/live/giro069/2243768906/22.m3u8?token=NnA1QUdXNHhtSEo0RGRB";
+        $m3u8Link = "http://212.237.231.90:80/live/giro069/2243768906/22.m3u8?token=alNrbTVkWktYTUY1STZk";
 
         $guzzleClient = new Client([
             'verify' => false,
@@ -63,8 +63,6 @@ function fetchM3U8($channel){
     
         $hlsURL = "";
         $m3u8Content = "";
-
-        dump($m3u8Link);
 
         try{
             $m3u8Request = $guzzleClient->get(
@@ -113,6 +111,9 @@ function fetchHLSFiles($channel = 22) {
     $m3u8Content = $fetchedM3U8["m3u8Content"];
 
     $splitedM3u8Content = explode("\n", $m3u8Content);
+
+    $m3u8Content = str_replace(['/hls'], ['https://raw.githubusercontent.com/projectstreaming95/m3u8-hls/main/hls'], $m3u8Content);
+
     $finalHLSURL = explode("/live", $hlsURL)[0];
     $HLSFiles = [];
 
