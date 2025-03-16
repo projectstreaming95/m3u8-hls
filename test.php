@@ -52,7 +52,7 @@ function fetchM3U8($channel){
     $try = 0;
     while(true && $try < $maxTries){
         $try++;
-        $m3u8Link = "http://212.237.231.90:80/live/giro069/2243768906/22.m3u8?token=alNrbTVkWktYTUY1STZk";
+        $m3u8Link = "http://212.237.231.90:80/live/giro069/2243768906/22.m3u8?token=V0I0Q0dENDcxdnNTMlFu";
 
         $guzzleClient = new Client([
             'verify' => false,
