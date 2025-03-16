@@ -52,18 +52,20 @@ function fetchM3U8($channel){
     $try = 0;
     while(true && $try < $maxTries){
         $try++;
-        $m3u8Link = "http://212.237.231.90:80/live/giro069/2243768906/$channel.m3u8?token=WG12SUJ2VElyaG1oM0dE";
+        $m3u8Link = "http://212.237.231.90:80/live/giro069/2243768906/22.m3u8?token=NnA1QUdXNHhtSEo0RGRB";
 
         $guzzleClient = new Client([
             'verify' => false,
             'headers' => [
                 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
             ],
-            // "proxy" => "tcp://219.100.37.205",
         ]);
     
         $hlsURL = "";
-        
+        $m3u8Content = "";
+
+        dump($m3u8Link);
+
         try{
             $m3u8Request = $guzzleClient->get(
                 $m3u8Link,
@@ -164,21 +166,5 @@ while(true):
     }catch(Exception $e){
         dump($e->getMessage());
     }
-
-    $guzzleClient = new Client();
-
-    $m3u8Request = $guzzleClient->get(
-        "http://google.com",
-        [
-            'on_stats' => function (TransferStats $stats) use (&$hlsURL) {
-                $hlsURL = $stats->getEffectiveUri();
-            },
-        ]
-    );
-
-    $m3u8Content = $m3u8Request->getBody()->getContents();
-
-    dump("hereee", $m3u8Content);
-
     break;
 endwhile;
