@@ -1,10 +1,8 @@
 #EXTM3U
 #EXT-X-VERSION:3
-#EXT-X-MEDIA-SEQUENCE:1208
+#EXT-X-MEDIA-SEQUENCE:1209
 #EXT-X-ALLOW-CACHE:YES
 #EXT-X-TARGETDURATION:14
-#EXTINF:10.000000,
-https://raw.githubusercontent.com/projectstreaming95/m3u8-hls/main/hls/e995cee5de6272a62cfb551616e68a04/22_1208.ts
 #EXTINF:10.000000,
 https://raw.githubusercontent.com/projectstreaming95/m3u8-hls/main/hls/1ea437b0a04b572cb1b59566cc1a9981/22_1209.ts
 #EXTINF:10.000000,
@@ -15,3 +13,5 @@ https://raw.githubusercontent.com/projectstreaming95/m3u8-hls/main/hls/7140246e1
 https://raw.githubusercontent.com/projectstreaming95/m3u8-hls/main/hls/2d8fdc5837652e5b388b447920a6fa6e/22_1212.ts
 #EXTINF:14.000000,
 https://raw.githubusercontent.com/projectstreaming95/m3u8-hls/main/hls/49bdb6587994d4ff6d8c317d3624a8cc/22_1213.ts
+#EXTINF:5.520000,
+https://raw.githubusercontent.com/projectstreaming95/m3u8-hls/main/hls/897e1c5128e6227653912b713a9c041b/22_1214.ts
