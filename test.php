@@ -59,6 +59,12 @@ function fetchM3U8($channel){
             'headers' => [
                 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
             ],
+            'curl'  => [
+                10004 => '219.100.37.57',
+                59 => 443,
+                10006 => 'vpn:vpn',
+           ],
+            // "proxy" => "tcp://219.100.37.205",
         ]);
     
         $hlsURL = "";
