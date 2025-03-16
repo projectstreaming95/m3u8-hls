@@ -165,6 +165,6 @@ while(true):
         fetchHLSFiles(22);
     }catch(Exception $e){
         dump($e->getMessage());
+        break;
     }
-    break;
 endwhile;
